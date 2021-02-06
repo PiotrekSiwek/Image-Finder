@@ -93,6 +93,20 @@
   margin-right: 5px;
 }
 
+@media (min-width: 1400px) {
+  .modal {
+    left: 400px;
+    right: 400px;
+    top:100px;
+    bottom: 100px;
+  }
+  .portrait{
+    top:20px;
+    bottom: 20px;
+  }
+}
+
+
 @media (max-width: 1150px) {
   .modal {
     left: 80px;
