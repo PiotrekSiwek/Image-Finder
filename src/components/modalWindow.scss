@@ -1,0 +1,165 @@
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(24, 24, 24, 0.75);
+}
+
+.modal {
+  position: absolute;
+  top: 20px;
+  left: 220px;
+  right: 220px;
+  bottom: 20px;
+  border: 1px solid #ccce;
+  background: #fff;
+  overflow: auto;
+  WebkitOverflowScrolling: touch;
+  borderRadius: 4px;
+  outline: none;
+  padding: 20px;
+  color: gray;
+
+  &__bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px 20px;
+  }
+
+  &__photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & .large-photo {
+      width: 680px;
+    }
+  }
+}
+
+.portrait{
+
+}
+
+.author {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 300px;
+
+  &__data {
+    font-size: 13px;
+    margin-left: 20px;
+  }
+  &__icon{
+    border-radius: 8px;
+  }
+}
+
+.close-btn {
+  background: white;
+  outline: none;
+  color: gray;
+  padding: 5px 10px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin-left: 40px;
+}
+
+.photo-location {
+  font-size: 13px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.fa-map-marker-alt {
+  margin-right: 5px;
+}
+
+@media (max-width: 1150px) {
+  .modal {
+    left: 80px;
+    right: 80px;
+  }
+}
+
+@media (max-width: 900px) {
+  .modal {
+    left: 40px;
+    right: 40px;
+
+    &__photo {
+      & .large-photo {
+        width: 90%;
+      }
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .modal {
+    &__bar {
+      padding: 0 10px 10px;
+    }
+
+    &__photo {
+      & .large-photo {
+        width: 95%;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 450px) {
+  .modal {
+    left: 10px;
+    right: 10px;
+    top:25%;
+    bottom: 25%;
+
+    &__photo {
+      & .large-photo {
+        width: 95%;
+      }
+    }
+  }
+  .portrait{
+    top:8%;
+    bottom: 8%;
+  }
+
+  .author {
+    &__data {
+      font-size: 11px;
+    }
+  }
+
+  .close-btn {
+    font-size: 12px;
+    margin-left: 20px;
+  }
+
+  .photo-location {
+    font-size: 11px;
+  }
+}
+
+
