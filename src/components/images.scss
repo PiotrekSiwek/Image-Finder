@@ -1,0 +1,34 @@
+.photo-box {
+  display: grid;
+  grid-template-columns: 32% 32% 32%;
+  grid-gap: 10px;
+  margin-left: 2%;
+}
+
+.photo-frame {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.photo {
+  cursor: pointer;
+}
+
+@media (max-width: 1300px) {
+  .photo {
+    width: 350px;
+  }
+}
+
+@media (max-width: 800px) {
+  .photo-box {
+    grid-template-columns: 48% 48%;
+  }
+}
+
+@media (max-width: 450px) {
+  .photo {
+    width: 250px;
+  }
+}

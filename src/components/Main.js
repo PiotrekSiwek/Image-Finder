@@ -2,8 +2,10 @@ import React, {useState} from "react";
 import classNames from "classnames";
 import log from "loglevel";
 
+import Spinner from "./Spinner";
 import SearchBar from "./SearchBar";
 import ModalWindow from "./ModalWindow";
+import Images from "./Images";
 
 import "./main.scss"
 
@@ -45,7 +47,7 @@ const Main = () => {
     const pictureFromInput = (e) => {
         picturesData.search = e.target.value;
     }
-    const pictureFromHint = (name) =>{
+    const pictureFromHint = (name) => {
         picturesData.search = name;
     }
     const closeModalWindow = () => {
@@ -84,23 +86,23 @@ const Main = () => {
         "orientationBtn-hide": !viewChange,
         "orientationBtn-show": viewChange
     });
-
     const viewClassnamesButtonMore = classNames({
-        "moreBtn-hide":!viewChange,
-        "moreBtn-show":viewChange
+        "moreBtn-hide": !viewChange,
+        "moreBtn-show": viewChange
     })
-
     const viewClassnamesMain = classNames("main", {
         "main-change": viewChange,
     });
-
     const viewClassnamesSearchBox = classNames("search-box", {
         "search-box-change": viewChange,
     });
-
+    const  viewClassnameSpinner = classNames("spinner-hide",{
+        "spinner": viewChange
+    })
 
     return (
         <main className={viewClassnamesMain}>
+
             <div className={viewClassnamesSearchBox}>
                 <h1 className="main-title">Best Images finder on the WEB</h1>
                 <SearchBar showResultsBtnClick={showResultsBtnClick}
@@ -109,7 +111,6 @@ const Main = () => {
                            pictureFromInput={pictureFromInput}>
                 </SearchBar>
             </div>
-            {result !== [] &&
             <div className="buttons-orientation">
                 <button className={viewClassnamesButtonsOrientation}
                         onClick={handleOrientationPortrait}>Portrait
@@ -118,22 +119,26 @@ const Main = () => {
                         onClick={handleOrientationLandscape}>Landscape
                 </button>
             </div>
+            {result.length ?
+                <Images handleModalOpen={handleModalOpen}
+                        pictureName={picturesData.search}
+                        result={result}>
+                </Images>
+                :
+                <div className={viewClassnameSpinner}>
+                    <Spinner/>
+                    <Spinner/>
+                    <Spinner/>
+                </div>
             }
-            <div className="photo-box">
-                {result.map((elm, index) => {
-                    return (
-                        <div className="photo-frame"
-                             key={index}>
-                            <img id={index}
-                                 className="photo"
-                                 src={elm.urls.small}
-                                 alt={picturesData.search}
-                                 onClick={handleModalOpen}/>
-                        </div>
-                    )
-                })
-                }
+            {result.length ?
+            <div className="button-more">
+                <button className={viewClassnamesButtonMore}
+                        onClick={handleButtonMoreImages}>More
+                </button>
             </div>
+            :null
+            }
             <ModalWindow
                 name={picturesData.author}
                 icon={picturesData.icon}
@@ -143,13 +148,6 @@ const Main = () => {
                 orientationLandscape={orientationLandscape}
                 closeModalWindow={closeModalWindow}>
             </ModalWindow>
-            {result !== [] &&
-            <div className="button-more">
-                <button className={viewClassnamesButtonMore}
-                        onClick={handleButtonMoreImages}>More
-                </button>
-            </div>
-            }
         </main>
     )
 }
