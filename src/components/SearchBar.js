@@ -15,15 +15,15 @@ const SearchBar = ({showResultsBtnClick, showResults, pictureFromInput, pictureF
         pictureFromInput(e);
         if (value.length >= 3) {
             setTimeout(() => {
-                fetch(`${process.env.REACT_APP_URL}1&per_page=6&query=${value}&client_id=${process.env.REACT_APP_HIDDEN_KEY}`)
+                fetch(`https://api.datamuse.com/sug?s=${value}&max=6`)
                     .then(response => response.json())
                     .then(data => {
-                        const description = [...data.results].map(elm => elm.alt_description);
-                        setHints([...description])
+                        const description = [...data].map(({word}) => word)
+                        setHints([...description]);
+                        setShowList(true);
                     })
                     .catch(message => log.error(message))
             }, 1000)
-            setShowList(true);
         } else {
             setShowList(false);
         }
@@ -41,6 +41,12 @@ const SearchBar = ({showResultsBtnClick, showResults, pictureFromInput, pictureF
             setShowList(false)
         }
     }
+
+    const handleSearchBtn = () =>{
+        showResultsBtnClick();
+        setShowList(false);
+    }
+
     const handleCloseBtn = () => {
         setInputText("");
         pictureFromHint("");
@@ -51,7 +57,7 @@ const SearchBar = ({showResultsBtnClick, showResults, pictureFromInput, pictureF
         <>
             <div className="input-wrap">
                 <button className="btn-search"
-                        onClick={showResultsBtnClick}>
+                        onClick={handleSearchBtn}>
                     <i className="fas fa-search"/>
                 </button>
                 <input className={"input-search"}
@@ -67,12 +73,10 @@ const SearchBar = ({showResultsBtnClick, showResults, pictureFromInput, pictureF
             </div>
             {showList &&
             <ul className="search-hints">
-                {hints.length ?
+                {hints &&
                     hints.map((elm, index) => {
                         return <li id={index} className="hint" key={index} onClick={handleHint}>{elm}</li>
                     })
-                    :
-                    <li className="hint"> brak podpowiedzi</li>
                 }
             </ul>
             }
