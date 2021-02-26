@@ -13,7 +13,7 @@ const SearchBar = ({showResultsBtnClick, showResults, pictureFromInput, pictureF
         const value = e.target.value.toLowerCase();
         setInputText(value);
         pictureFromInput(e);
-        if (value.length >= 3) {
+        if (value.length >= 1) {
             setTimeout(() => {
                 fetch(`https://api.datamuse.com/sug?s=${value}&max=6`)
                     .then(response => response.json())
@@ -23,7 +23,7 @@ const SearchBar = ({showResultsBtnClick, showResults, pictureFromInput, pictureF
                         setShowList(true);
                     })
                     .catch(message => log.error(message))
-            }, 1000)
+            }, 400)
         } else {
             setShowList(false);
         }
